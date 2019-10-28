@@ -1,0 +1,36 @@
+server:
+  port: 8222
+spring:
+  application:
+      name: microserver-gateway
+#  zipkin:
+#    base-url: http://127.0.0.1:9401
+#    sender:
+#      type: web
+#  sleuth:
+#    sampler:
+#      probability: 1
+
+eureka:
+  instance:
+    prefer-ip-address: true #优先使用ip地址注册到eureka
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
+
+
+#如果转发路径与微服务的名称是一样的，这段配置完全不需要配置
+zull:
+  rotues:
+    microserver-user:
+      path: /microserver-user #需要转发的路径
+      serviceId: microserver-user #最终需要转发微服务的名称
+    microserver-movie:
+      path: /microserver-movie #需要转发的路径
+      serviceId: microserver-movie #最终需要转发微服务的名称
+  SendErrorFilter:
+    error:
+      disable: true
+
